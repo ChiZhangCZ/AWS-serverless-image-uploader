@@ -8,6 +8,9 @@ resource "random_string" "random" {
 resource "aws_s3_bucket" "upload_bucket" {
   bucket = "s3-image-store-${random_string.random.result}"
   acl    = "private"
+  versioning {
+    enabled = true
+  }
 
   cors_rule {
     allowed_headers = ["*"]
