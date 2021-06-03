@@ -43,7 +43,7 @@ resource "aws_iam_policy" "s3_write_policy" {
               "s3:PutObjectAcl",
               "s3:PutLifecycleConfiguration"
         ],
-        "Resource": "${aws_s3_bucket.upload_bucket.arn}"
+        "Resource": "*"
     }
 ]
 
