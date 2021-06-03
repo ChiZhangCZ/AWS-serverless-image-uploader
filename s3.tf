@@ -1,6 +1,6 @@
 resource "aws_s3_bucket" "upload_bucket" {
   bucket = "s3-image-store"
-  ACL    = "private"
+  acl    = "private"
 
   cors_rule {
     allowed_headers = ["*"]
