@@ -4,6 +4,11 @@ resource "aws_lambda_function" "s3_uploader" {
   role = aws_iam_role.lambda_exec.arn
   runtime = "nodejs12.x"
   filename = "getSignedURL/getSignedURL.zip"
+  environment {
+    variables = {
+      UploadBucket = aws_s3_bucket.upload_bucket.id
+    }
+  }
 }
 
 resource "aws_iam_role" "lambda_exec" {

@@ -36,3 +36,12 @@ resource "aws_lambda_permission" "api_gateway" {
   # within the API Gateway REST API.
   source_arn = "${aws_api_gateway_rest_api.image_uploader.execution_arn}/*/*"
 }
+
+resource "aws_api_gateway_deployment" "image_uploader_deployment" {
+  depends_on = [
+    aws_api_gateway_integration.lambda
+  ]
+
+  rest_api_id = aws_api_gateway_rest_api.image_uploader.id
+  stage_name  = "uploads"
+}
