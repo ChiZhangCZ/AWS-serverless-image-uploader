@@ -33,9 +33,9 @@ resource "aws_iam_policy" "s3_write_policy" {
 
 
   policy = <<EOF
-   {
-"Version": "2012-10-17",
-"Statement": [
+{
+  "Version": "2012-10-17",
+  "Statement": [
     {
         "Effect": "Allow",
         "Action": [
@@ -45,10 +45,10 @@ resource "aws_iam_policy" "s3_write_policy" {
         ],
         "Resource": "*"
     }
-]
-
+  ]
 }
-    EOF
+EOF
+
 }
 
 resource "aws_iam_role_policy_attachment" "lambda_attach" {
