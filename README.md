@@ -1,1 +1,1 @@
-# AWS-serverless-image-uploader
+# AWS Serverless Image Uploader
