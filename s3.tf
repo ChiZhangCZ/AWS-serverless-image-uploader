@@ -2,6 +2,7 @@ resource "random_string" "random" {
   length = 16
   special = true
   override_special = "/@£$"
+  upper = false
 }
 
 resource "aws_s3_bucket" "upload_bucket" {
