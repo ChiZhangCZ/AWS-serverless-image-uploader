@@ -3,7 +3,9 @@ resource "aws_lambda_function" "s3_uploader" {
   handler = "app.handler"
   role = aws_iam_role.lambda_exec.arn
   runtime = "nodejs12.x"
-  filename = "getSignedURL/getSignedURL.zip"
+  filename = "getSignedURL/lambda.zip"
+  source_code_hash = data.archive_file.lambda_zip.output_base64sha256
+
   environment {
     variables = {
       UploadBucket = aws_s3_bucket.upload_bucket.id
@@ -59,4 +61,10 @@ EOF
 resource "aws_iam_role_policy_attachment" "lambda_attach" {
   role       = aws_iam_role.lambda_exec.name
   policy_arn = aws_iam_policy.s3_write_policy.arn
+}
+
+data "archive_file" "lambda_zip" {
+  type        = "zip"
+  source_dir  = "getSignedURL"
+  output_path = "getSignedURL/lambda.zip"
 }
