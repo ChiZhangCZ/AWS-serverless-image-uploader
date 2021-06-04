@@ -1,11 +1,5 @@
-resource "random_string" "random" {
-  length  = 16
-  special = false
-  upper   = false
-}
-
 resource "aws_s3_bucket" "upload_bucket" {
-  bucket = "s3-image-store-${random_string.random.result}"
+  bucket = "s3-image-store-${local.timestamp_sanitized}"
   acl    = "private"
   versioning {
     enabled = true
