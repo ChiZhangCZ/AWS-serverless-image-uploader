@@ -1,3 +1,9 @@
+data "archive_file" "lambda_zip" {
+  type        = "zip"
+  source_dir  = "getSignedURL"
+  output_path = "getSignedURL/lambda.zip"
+}
+
 resource "aws_lambda_function" "s3_uploader" {
   function_name    = "s3Uploader"
   handler          = "app.handler"
@@ -55,13 +61,32 @@ EOF
 
 }
 
-resource "aws_iam_role_policy_attachment" "lambda_attach" {
+resource "aws_iam_policy" "decrypt_environment_variables" {
+  name        = "s3_write_policy"
+  description = "Allows Lambda to decrypt environment variables"
+  policy      = <<EOF
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+        "Effect": "Allow",
+        "Action": [
+              "kms:Decrypt"
+        ],
+        "Resource": "*"
+    }
+  ]
+}
+EOF
+
+}
+
+resource "aws_iam_role_policy_attachment" "lambda_s3write_attach" {
   role       = aws_iam_role.lambda_exec.name
   policy_arn = aws_iam_policy.s3_write_policy.arn
 }
 
-data "archive_file" "lambda_zip" {
-  type        = "zip"
-  source_dir  = "getSignedURL"
-  output_path = "getSignedURL/lambda.zip"
+resource "aws_iam_role_policy_attachment" "lambda_decrypt_attach" {
+  role       = aws_iam_role.lambda_exec.name
+  policy_arn = aws_iam_policy.decrypt_environment_variables.arn
 }
