@@ -62,7 +62,7 @@ EOF
 }
 
 resource "aws_iam_policy" "decrypt_environment_variables" {
-  name        = "s3_write_policy"
+  name        = "decrypt_environment_variables_policy"
   description = "Allows Lambda to decrypt environment variables"
   policy      = <<EOF
 {
