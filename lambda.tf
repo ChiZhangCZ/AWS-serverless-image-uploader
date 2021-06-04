@@ -20,7 +20,7 @@ resource "aws_lambda_function" "s3_uploader" {
 }
 
 resource "aws_iam_role" "lambda_exec" {
-  name               = "serverless_example_lambda-${random_string.random.result}"
+  name               = "serverless_example_lambda-${local.timestamp_sanitized}"
   assume_role_policy = <<EOF
 {
   "Version": "2012-10-17",
