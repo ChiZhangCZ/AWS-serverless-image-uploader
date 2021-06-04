@@ -61,32 +61,7 @@ EOF
 
 }
 
-resource "aws_iam_policy" "decrypt_environment_variables" {
-  name        = "decrypt_environment_variables_policy"
-  description = "Allows Lambda to decrypt environment variables"
-  policy      = <<EOF
-{
-  "Version": "2012-10-17",
-  "Statement": [
-    {
-        "Effect": "Allow",
-        "Action": [
-              "kms:Decrypt"
-        ],
-        "Resource": "*"
-    }
-  ]
-}
-EOF
-
-}
-
 resource "aws_iam_role_policy_attachment" "lambda_s3write_attach" {
   role       = aws_iam_role.lambda_exec.name
   policy_arn = aws_iam_policy.s3_write_policy.arn
-}
-
-resource "aws_iam_role_policy_attachment" "lambda_decrypt_attach" {
-  role       = aws_iam_role.lambda_exec.name
-  policy_arn = aws_iam_policy.decrypt_environment_variables.arn
 }

@@ -13,7 +13,7 @@ resource "aws_s3_bucket" "upload_bucket" {
 
   cors_rule {
     allowed_headers = ["*"]
-    allowed_methods = ["PUT", "POST", "HEAD"]
+    allowed_methods = ["GET", "PUT", "HEAD"]
     allowed_origins = ["*"]
     max_age_seconds = 3000
   }
