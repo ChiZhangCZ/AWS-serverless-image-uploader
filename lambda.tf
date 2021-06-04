@@ -1,9 +1,9 @@
 resource "aws_lambda_function" "s3_uploader" {
-  function_name = "s3Uploader"
-  handler = "app.handler"
-  role = aws_iam_role.lambda_exec.arn
-  runtime = "nodejs12.x"
-  filename = "getSignedURL/lambda.zip"
+  function_name    = "s3Uploader"
+  handler          = "app.handler"
+  role             = aws_iam_role.lambda_exec.arn
+  runtime          = "nodejs12.x"
+  filename         = "getSignedURL/lambda.zip"
   source_code_hash = data.archive_file.lambda_zip.output_base64sha256
 
   environment {
@@ -14,8 +14,7 @@ resource "aws_lambda_function" "s3_uploader" {
 }
 
 resource "aws_iam_role" "lambda_exec" {
-  name = "serverless_example_lambda"
-
+  name               = "serverless_example_lambda"
   assume_role_policy = <<EOF
 {
   "Version": "2012-10-17",
@@ -35,11 +34,9 @@ EOF
 }
 
 resource "aws_iam_policy" "s3_write_policy" {
-  name = "s3_write_policy"
+  name        = "s3_write_policy"
   description = "Allows Lambda to write to S3"
-
-
-  policy = <<EOF
+  policy      = <<EOF
 {
   "Version": "2012-10-17",
   "Statement": [

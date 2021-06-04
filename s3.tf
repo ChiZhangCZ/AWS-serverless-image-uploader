@@ -1,8 +1,7 @@
 resource "random_string" "random" {
-  length = 16
+  length  = 16
   special = false
-  override_special = "/@£$"
-  upper = false
+  upper   = false
 }
 
 resource "aws_s3_bucket" "upload_bucket" {
@@ -21,7 +20,7 @@ resource "aws_s3_bucket" "upload_bucket" {
 }
 
 resource "aws_s3_bucket_public_access_block" "block_public_access" {
-  bucket = aws_s3_bucket.upload_bucket.id
+  bucket                  = aws_s3_bucket.upload_bucket.id
 
   block_public_acls       = true
   block_public_policy     = true

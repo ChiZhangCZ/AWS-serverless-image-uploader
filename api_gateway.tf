@@ -51,7 +51,7 @@ resource "aws_lambda_permission" "api_gateway" {
 
   # The "/*/*" portion grants access from any method on any resource
   # within the API Gateway REST API.
-  source_arn = "${aws_api_gateway_rest_api.image_uploader.execution_arn}/*/*"
+  source_arn    = "${aws_api_gateway_rest_api.image_uploader.execution_arn}/*/*"
 }
 
 resource "aws_api_gateway_deployment" "image_uploader_deployment" {
